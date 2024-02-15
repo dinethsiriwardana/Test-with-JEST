@@ -4,7 +4,7 @@ const app = express();
 
 app.use(express.json());
 app.get("/", (req, res) => {
-  res.status(200).send("Hello World!");
+  res.status(200).send({ out: "Hello World!" });
 });
 app.post("/users", async (req, res) => {
   const { password, username } = req.body;

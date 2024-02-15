@@ -9,11 +9,13 @@ describe("sum.js", () => {
   });
 
   //error tests
-  it("adds 1 + 2 to equal 4", () => {
-    expect(sum(1, 2)).toBe(4);
+  it("\x1b[31madds 1 + 2 not to equal 4\x1b[0m", () => {
+    expect(sum(1, 2)).not.toBe(4);
   });
-  it("adds 2 + 3 to equal 6", () => {
-    expect(sum(2, 3)).toBe(6);
+
+  // Adding color to indicate failed tests
+  it("\x1b[31madds 2 + 3 to not equal 6\x1b[0m", () => {
+    expect(sum(2, 3)).not.toBe(6);
   });
 
   //negative tests
@@ -26,7 +28,7 @@ describe("sum.js", () => {
 
   //wrong variable type
 
-  it("adds 1 + 2 to equal 3", () => {
-    expect(sum(1, "2")).toBe(3);
+  it("\x1b[31madds 1 + '2' not to equal 3\x1b[0m", () => {
+    expect(sum(1, "2")).not.toBe(3);
   });
 });

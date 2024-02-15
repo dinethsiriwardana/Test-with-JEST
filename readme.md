@@ -1,28 +1,28 @@
-To set up Jest test cases with ES6, follow these steps:
+# To set up Jest test cases with ES6, follow these steps:
 
-# Initialize the project and install Jest
+## Initialize the project and install Jest
 
 ```bash
 npm init -y
 npm install --save-dev jest
 ```
 
-# Create files for your code and tests
+## Create files for your code and tests
 ```bash
 create file sum.js
 create file sum.test.js
 ```
-# Set up Jest configuration
+## Set up Jest configuration
 ```bash
 setup config.js
 ```
-# Install Babel preset for environment compatibility
+## Install Babel preset for environment compatibility
 ```bash
 npm install @babel/preset-env --save-dev
 ```
-# Create a .babelrc file
+## Create a .babelrc file
 
-# Run your tests
+## Run your tests
 
 ```bash
 npm test

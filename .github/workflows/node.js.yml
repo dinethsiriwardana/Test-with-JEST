@@ -31,11 +31,20 @@ jobs:
     needs: build # Ensure build job runs successfully first
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Create pull request
-        uses: peter-evans/create-pull-request@v4
+      - name: Checkout code
+        uses: actions/checkout@v2
         with:
-          branch: main
-          base: test
-          title: Update test
+          ref: test
+
+      # Add steps to make changes here
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
+          branch: test
+          title: "Your PR Title"
+          body: "Your PR Description"
+          draft: false
+          labels: "automated pr, your-label"

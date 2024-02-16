@@ -27,3 +27,22 @@ jobs:
           cache: "npm"
       - run: npm i
       - run: npm test
+
+      - name: Run the Action
+        uses: devops-infra/action-pull-request@v0.5.5
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          source_branch: test
+          target_branch: main
+          title: My pull request
+          template: .github/PULL_REQUEST_TEMPLATE.md
+          body: "**Automated pull request**"
+
+          label: enhancement
+          milestone: My milestone
+          draft: true
+          old_string: "<!-- Add your description here -->"
+          new_string: "** Automatic pull request**"
+          get_diff: true
+          ignore_users: "dependabot"
+          allow_no_diff: false

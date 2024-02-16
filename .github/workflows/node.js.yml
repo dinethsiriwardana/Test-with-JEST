@@ -42,8 +42,8 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          base: main
-          branch: test
+          base: test
+          branch: main
           title: "Your PR Title"
           body: "Your PR Description"
           draft: false

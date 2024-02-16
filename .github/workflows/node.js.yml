@@ -27,38 +27,15 @@ jobs:
           cache: "npm"
       - run: npm i
       - run: npm test
-
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Create Pull Request
-        uses: actions/github-script@v6
+  create-pr:
+    needs: build # Ensure build job runs successfully first
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v4
         with:
-          script: |
-            const { repo, owner } = context.repo;
-            const pulls = await github.rest.pulls.list({
-              owner: owner,
-              repo: repo,
-              head: context.ref,
-              base: 'main', // The branch you want to merge your changes into
-              state: 'open',
-            });
-
-            if (pulls.data.length <  1) {
-              await github.rest.pulls.create({
-                title: 'New Feature',
-                owner: owner,
-                repo: repo,
-                head: context.ref,
-                base: 'main',
-                body: 'This PR contains new feature changes.',
-              });
-            } else {
-              const existingPR = pulls.data[0];
-              await github.rest.pulls.update({
-                owner: owner,
-                repo: repo,
-                pull_number: existingPR.number,
-                body: existingPR.body + '\n\nUpdated by the latest push.',
-              });
-            }
+          branch: test
+          base: main
+          title: Update test
+          token: ${{ secrets.GITHUB_TOKEN }}

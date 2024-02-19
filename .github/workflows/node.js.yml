@@ -27,15 +27,11 @@ jobs:
           cache: "npm"
       - run: npm i
       - run: npm test
-  create-pr:
-    needs: build # Ensure build job runs successfully first
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Create pull request
-        uses: peter-evans/create-pull-request@v4
-        with:
-          branch: main
-          base: test
-          title: Update test
-          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: create pull request
+        run: gh pr create -B main -H build/beta --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
